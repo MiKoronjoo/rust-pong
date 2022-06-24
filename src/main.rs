@@ -1,3 +1,5 @@
+mod pong;
+
 fn main() {
-    println!("Hello, world!");
+    pong::run();
 }
