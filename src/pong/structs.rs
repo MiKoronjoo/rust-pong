@@ -13,7 +13,7 @@ pub struct Game {
     board: Board,
     p1: Player,
     p2: Player,
-    window: *mut i8,
+    pub window: *mut i8,
 }
 
 pub struct Player {
