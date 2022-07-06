@@ -1,6 +1,5 @@
 extern crate ncurses;
 use itertools::Itertools;
-
 use ncurses::*;
 mod structs;
 
@@ -42,6 +41,8 @@ pub fn run() {
         //     continue;
         // }
         clear();
+        game.ball.mov();
+        game.ball_impact();
         game.show();
 
         // for i in 0..4 {
