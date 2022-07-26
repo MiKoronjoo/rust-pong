@@ -22,6 +22,7 @@ pub struct Player {
     x: i32,
     y: i32,
     len: i32,
+    pub score: u16,
 }
 
 pub struct Ball {
@@ -76,11 +77,13 @@ impl Game {
                 x: 4,
                 y: 3,
                 len: y / 4,
+                score: 0,
             },
             p2: Player {
                 x: x - 4,
                 y: 3,
                 len: y / 4,
+                score: 0,
             },
             ball: Ball {
                 x: (x / 2) as f32,
@@ -108,10 +111,12 @@ impl Game {
         } else if self.ball.y() <= 1 || self.ball.y() > self.board.y1 {
             self.ball.dig *= -1.0;
         } else if self.ball.x() <= 0 {
+            self.p2.score += 1;
             self.ball.x = (self.board.x1 / 2) as f32;
             self.ball.y = (self.board.y1 / 2) as f32;
             self.ball.dig = 0.0;
         } else if self.ball.x() >= self.board.x1 {
+            self.p1.score += 1;
             self.ball.x = (self.board.x1 / 2) as f32;
             self.ball.y = (self.board.y1 / 2) as f32;
             self.ball.dig = PI;
@@ -139,6 +144,14 @@ impl Game {
 
     pub fn show(&self) {
         let window = self.window;
+        wmove(window, 0, 3);
+        addstr(self.p1.score.to_string().as_str());
+        wmove(
+            window,
+            0,
+            self.board.x1 - self.p2.score.to_string().len() as i32,
+        );
+        addstr(self.p2.score.to_string().as_str());
         wmove(window, self.board.x0, self.board.y0);
         addstr("▛");
         for _ in 0..self.board.x1 - 3 {

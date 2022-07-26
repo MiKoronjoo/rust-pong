@@ -13,8 +13,6 @@ pub fn run() {
     curs_set(CURSOR_VISIBILITY::CURSOR_INVISIBLE);
     noecho();
     game.show();
-    // wmove(game.window, y / 2, x / 2);
-    // addstr("██");
     let mut quit = false;
     timeout(10);
     loop {
